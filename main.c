@@ -17,9 +17,8 @@ int main(){
         createModel(c);
         printf("\n\n");
         select(c,ficha);
-        //ia(c, ficha);
+        ia(c, ficha);
     } while (1);
-    
 }
 
 void loadOnMatriz(char c[3][3]){
@@ -74,7 +73,7 @@ char whichFicha(){
     exit(1);
 }
 
-/*void ia(char c[3][3], char ficha){
+void ia(char c[3][3], char ficha){
     char posicion;
     char fichaComputer;
     if (ficha=='O')
@@ -87,7 +86,7 @@ char whichFicha(){
     srand(time(NULL));
     do
     {
-        posicion = rand()%10;
+        posicion = (rand()%9)+'0';
         for (int i = 0; i < 3; i++)
         {
             for (int j = 0; j < 3; j++)
@@ -95,7 +94,7 @@ char whichFicha(){
                 if (c[i][j] == posicion)
                 {
                     c[i][j] = fichaComputer;
-                    break;
+                    return;
                 }
                 
                 
@@ -103,7 +102,7 @@ char whichFicha(){
             
         }
     } while (1);
-}*/
+}
 
 void select(char c[3][3], char ficha){
     char input;
@@ -126,7 +125,7 @@ void select(char c[3][3], char ficha){
             }
             
         }
-        printf("\nNo se ha encontrado la posicion indicado");
+        printf("\nNo se encuentra disponible la ubicacion:(");
         getchar();
     } while (1);
     
