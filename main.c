@@ -10,6 +10,7 @@ void ia(char c[3][3], char ficha);
 char winner(char c[3][3], char ficha);
 int tablas(char c[3][3]);
 char whichWinner(char c[3][3]);
+void loopPrincipal(char c[3][3]);
 
 int main(){
     char c [3][3];
@@ -18,18 +19,18 @@ int main(){
     char fichaWinner;
     do
     {
-        printf("\n\n");
-        createModel(c);
-        printf("\n\n");
+        loopPrincipal(c);
         select(c,ficha);
         fichaWinner = whichWinner(c);
         if (fichaWinner != '1')
         {
+            loopPrincipal(c);
             printf("\n\nHan ganado las %c", fichaWinner);
             exit(1);
         }
         if (tablas(c) == 1)
         {
+            loopPrincipal(c);
             printf("\n\nEmpate");
             exit(1);
         }
@@ -210,4 +211,11 @@ char whichWinner(char c[3][3]){
         return ficha;
     }
     return '1';
+}
+
+void loopPrincipal(char c[3][3]){
+    system("cls");
+    printf("\n");
+    createModel(c);
+    printf("\n");
 }
