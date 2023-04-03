@@ -7,16 +7,33 @@ void createModel(char c[3][3]);
 char whichFicha();
 void select(char c[3][3], char ficha);
 void ia(char c[3][3], char ficha);
+char winner(char c[3][3], char ficha);
+int tablas(char c[3][3]);
+char whichWinner(char c[3][3]);
 
 int main(){
     char c [3][3];
     loadOnMatriz(c);
     char ficha = whichFicha();
+    char fichaWinner;
     do
     {
+        printf("\n\n");
         createModel(c);
         printf("\n\n");
         select(c,ficha);
+        fichaWinner = whichWinner(c);
+        if (fichaWinner != '1')
+        {
+            printf("\n\nHan ganado las %c", fichaWinner);
+            exit(1);
+        }
+        if (tablas(c) == 1)
+        {
+            printf("\n\nEmpate");
+            exit(1);
+        }
+        
         ia(c, ficha);
     } while (1);
 }
@@ -129,4 +146,68 @@ void select(char c[3][3], char ficha){
         getchar();
     } while (1);
     
+}
+
+char winner(char c[3][3], char ficha){
+    
+    if (c[0][0] == ficha && c[0][1] == ficha && c[0][2] == ficha)
+    {
+        return ficha;
+    }
+    if (c[1][0] == ficha && c[1][1] == ficha && c[1][2] == ficha)
+    {
+        return ficha;
+    }
+    if (c[2][0] == ficha && c[2][1] == ficha && c[2][2] == ficha)
+    {
+        return ficha;
+    }
+    if (c[0][0] == ficha && c[1][0] == ficha && c[2][0] == ficha)
+    {
+        return ficha;
+    }
+    if (c[0][1] == ficha && c[1][1] == ficha && c[2][1] == ficha)
+    {
+        return ficha;
+    }
+    if (c[0][2] == ficha && c[1][2] == ficha && c[2][2] == ficha)
+    {
+        return ficha;
+    }
+    if (c[0][0] == ficha && c[1][1] == ficha && c[2][2] == ficha)
+    {
+        return ficha;
+    }
+    return '0';
+}
+
+int tablas(char c[3][3]){
+    for (int i = 0; i < 3; i++)
+    {
+        for (int j = 0; j < 3; j++)
+        {
+            if (c[i][j] != 'X' && c[i][j] != 'O')
+            {
+                return 0;
+            }
+            
+        }
+        
+    }
+    return 1;
+}
+
+char whichWinner(char c[3][3]){
+    char ficha;
+    ficha = winner(c,'X');
+    if (ficha != '0')
+    {
+        return ficha;
+    }
+    ficha = winner(c,'O');
+    if (ficha != '0')
+    {
+        return ficha;
+    }
+    return '1';
 }
